@@ -5,7 +5,9 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class Stocks {
+public class StockInvestment {
+
+    private int id;
 
     private String name;
 
