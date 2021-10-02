@@ -6,7 +6,10 @@ import com.akshat14714.stockcalculator.common.dtos.UserStocks;
 import com.akshat14714.stockcalculator.common.dtos.request.StockInvestmentRequest;
 import com.akshat14714.stockcalculator.common.dtos.response.UserProfileResponse;
 import com.akshat14714.stockcalculator.controllers.UserController;
+import com.akshat14714.stockcalculator.repository.StockRepository;
+import com.akshat14714.stockcalculator.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,12 +18,21 @@ import java.util.List;
 @Slf4j
 public class UserControllerImpl implements UserController {
 
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    StockRepository stockRepository;
+
     @Override
     public UserProfileResponse getUserProfileFromId(String email) {
         UserProfileResponse response = new UserProfileResponse(email);
 
-        response.setUserName("Akshat");
-        response.setEmail(email);
+        User user = userRepository.findUserByEmail(email);
+        response.setUserName(user.getName());
+
+        List<UserStocks> userStocks = stockRepository.findAllStocksByUserId(user.getUserId());
+        response.setStocks(userStocks);
 
         return response;
     }
