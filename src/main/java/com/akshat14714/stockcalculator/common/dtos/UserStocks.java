@@ -1,6 +1,5 @@
-package com.akshat14714.stockcalculator.common.dtos.request;
+package com.akshat14714.stockcalculator.common.dtos;
 
-import com.akshat14714.stockcalculator.common.dtos.LatLong;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
@@ -12,11 +11,15 @@ import lombok.ToString;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Builder
-public class GoogleDirectionRequest {
+public class UserStocks {
 
-    private LatLong origin;
+    private int id;
 
-    private LatLong destination;
+    private int userId;
 
-    private String mode;
+    private int stockId;
+
+    private int quantity;
+
+    private int incentive;
 }

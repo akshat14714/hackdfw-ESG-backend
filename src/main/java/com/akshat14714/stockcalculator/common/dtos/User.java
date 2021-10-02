@@ -5,8 +5,11 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class Distance {
+public class User {
 
-    private String text;
-    private Integer value;
+    private int userId;
+
+    private String name;
+
+    private int incentive;
 }
