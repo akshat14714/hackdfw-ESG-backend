@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class UserProfileRequest {
 
-    private int id;
+    private String email;
 }

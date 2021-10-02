@@ -1,8 +1,9 @@
 package com.akshat14714.stockcalculator.services;
 
+import com.akshat14714.stockcalculator.common.dtos.request.UserProfileRequest;
 import org.springframework.http.ResponseEntity;
 
 public interface UserService {
 
-    ResponseEntity getUserProfile(int id);
+    ResponseEntity getUserProfile(UserProfileRequest request);
 }
