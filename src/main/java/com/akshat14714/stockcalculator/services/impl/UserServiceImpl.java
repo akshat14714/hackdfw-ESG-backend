@@ -1,6 +1,7 @@
 package com.akshat14714.stockcalculator.services.impl;
 
 import com.akshat14714.stockcalculator.common.dtos.exception.GenericException;
+import com.akshat14714.stockcalculator.common.dtos.request.UserInvestmentRequest;
 import com.akshat14714.stockcalculator.common.dtos.request.UserProfileRequest;
 import com.akshat14714.stockcalculator.common.dtos.response.GenericResponse;
 import com.akshat14714.stockcalculator.common.dtos.response.UserProfileResponse;
@@ -37,7 +38,25 @@ public class UserServiceImpl implements UserService {
             GenericResponse gr = new GenericResponse(e.getResponse());
             return ResponseEntity.status(gr.getCode()).body(gr);
         } catch (Exception e) {
-            log.error("Direction Service for request failed: {}", Arrays.toString(e.getStackTrace()));
+            log.error("User Service for request failed: {}", Arrays.toString(e.getStackTrace()));
+            throw new GenericException(e);
+        }
+    }
+
+    @Override
+    @RequestMapping(method = RequestMethod.PUT, value = "/invest", produces = "application/json", consumes = "application/json")
+    public ResponseEntity getAddUserInvestment(@RequestBody UserInvestmentRequest request) {
+        log.info("request : {}", request.toString());
+        try {
+            boolean response = userController.addUserInvestment(request.getEmail(), request.getStocks());
+            GenericResponse gr = new GenericResponse(200, "success", null);
+            gr.setData(response);
+            return ResponseEntity.ok().body(gr);
+        } catch (GenericException e) {
+            GenericResponse gr = new GenericResponse(e.getResponse());
+            return ResponseEntity.status(gr.getCode()).body(gr);
+        } catch (Exception e) {
+            log.error("User Service for request failed: {}", Arrays.toString(e.getStackTrace()));
             throw new GenericException(e);
         }
     }

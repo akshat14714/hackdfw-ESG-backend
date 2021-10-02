@@ -11,7 +11,7 @@ public class Stocks {
 
     private int esg;
 
-    private int stockReturn;
+    private double stockReturn;
 
     private int incentive;
 
